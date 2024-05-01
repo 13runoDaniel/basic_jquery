@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basic jQuery</title>
+</head>
+<style>
+    body{
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        font-size: 36px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .teste{
+        border-width: 3px;
+        border-style: groove;
+        border-color: red;
+    }
+
+    .mudar-backgroud{
+        background-color: yellow;
+    }
+
+    a{
+        color: black;
+        text-decoration: none;
+        border-width: 3px;
+    }
+
+    li{
+        text-align: start;
+        list-style-type: square;
+        margin-bottom: 20px;
+    }
+
+    li a{
+        border: none;
+    }
+
+    li a:hover{
+        text-decoration: underline;
+    }
+
+    .fundo{
+        background-color: red;
+        color: hotpink;
+    }
+
+    button{
+        padding: 8px 12px;
+        background-color: green;
+        text-transform: uppercase;
+        border: none;
+        font-weight: bold;
+        color: gold;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <p>
+        <a href="#">
+            Clique aqui
+        </a>
+    </p>
+    <p>
+        <a href="#">
+            Clique aqui
+        </a>
+    </p>
+    <hr />
+    <ul id="lista_teste">
+        <li>
+            <a href="#">
+                Link 1
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                Link 2
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                Link 3
+            </a>
+        </li>
+    </ul>
+    <hr />
+    <ul id="outra_lista">
+        <li>
+            <a href="#">
+                Link 1
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                Link 2
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                Link 3
+            </a>
+        </li>
+    </ul>
+    <button type="button" id="btn_one">
+        Clique aqui
+    </button>
+    <button type="button" id="btn_two">
+        Não clique
+    </button>
+    <hr />
+    <ul id="terceira_lista">
+        <li>
+            <a href="#">
+                Link 1
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                Link 2
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                Link 3
+            </a>
+        </li>
+    </ul>
+    <hr />
+    <form>
+        <div>
+            <label for="camp_one">
+                Information 1
+            </label>
+            <input type="camp_one" name="camp_one" id="camp_one" placeholder="Information one">
+        </div>
+        <div>
+            <label for="camp_two">
+                Information 2
+            </label>
+            <input type="camp_two" name="camp_two" id="camp_two" placeholder="Information two">
+        </div>
+        <button type="submit" id="btn_tre">
+            Enviar
+        </button>
+    </form>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            console.log("Hello jQuery");
+
+            $("a").click(function(){
+                alert("Cliquei aqui mesmo");
+            });
+
+            $("a").on("click", function(){
+                $("p").addClass("mudar-backgroud");
+                $("p").addClass("teste");
+            });
+
+            $("a").click(function(){
+                $("a").css("color", "blue");
+            });
+
+            $("#lista_teste").hover(function(){
+                $(this).addClass("fundo");
+            }, function(){
+                $(this).removeClass("fundo");
+            });
+
+            $("#lista_teste").hover(function(){
+                $(this).css("color", "gold");
+            }, function(){
+                $(this).css("color", "black");
+            });
+
+            $("#outra_lista li:last").hover(function(){
+                $(this).css("color", "gold");
+            }, function(){
+                $(this).css("color", "black");
+            });
+
+            $("#outra_lista li:last").hover(function(){
+                $(this).addClass("fundo");
+            }, function(){
+                $(this).removeClass("fundo");
+            });
+
+            $("#btn_one").click(function(){
+                $("#lista_teste").addClass("fundo");
+                $("#outra_lista li:last").addClass("fundo");
+                $("#outra_lista li:last").css("color", "gold");
+            });
+
+            $("#btn_two").click(function(){
+                $("#lista_teste").removeClass("fundo");
+                $("#outra_lista li:last").removeClass("fundo");
+                $("#outra_lista li:last").css("color", "black");
+                $("p").removeClass("mudar-backgroud");
+                $("p").removeClass("teste");
+                $("a").css("color", "black");
+            });
+
+            $("#btn_one").click(function(){
+                $("p").hide("fast");
+            });
+
+            $("#btn_two").click(function(){
+                $("p").show("slow");
+            });
+
+            $("#terceira_lista").find("li").each(function(){
+                $(this).html($(this).html() + "está aqui!!");
+            });
+
+            $("#terceira_lista").find("li").each(function(){
+                $(this).addClass("fundo");
+            });
+
+            $("body").find("p:last").each(function(){
+                $(this).html($(this).html() + "tudo bem?");
+            });
+
+            $("#btn_tre").on("click", function(){
+                if ($("#camp_one").val() != $("#camp_two").val()){
+                    alert("Preencher os campos com a mesma informação");
+                } else{
+                    alert("Campos preenchidos iguais");
+                };
+            });
+
+        });
+    </script>
+</body>
+</html>
